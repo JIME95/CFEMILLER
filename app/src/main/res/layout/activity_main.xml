@@ -28,11 +28,12 @@
         android:text="Iniciar"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="5sp"
+        android:layout_marginBottom="10sp"
         android:textSize="18sp" />
 
     <ListView
         android:id="@+id/ListaFacturas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:dividerHeight="16dp" />
 </LinearLayout>
