@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviando = new ProgressDialog(getApplicationContext());
-                enviando.setMessage("Subiendo Supervicion. Por favor espere...");
+                enviando = new ProgressDialog(MainActivity.this);
+                enviando.setMessage("Enviando mensajes. Por favor espere...");
                 enviando.setIndeterminate(false);
                 enviando.setCancelable(false);
                 enviando.show();
