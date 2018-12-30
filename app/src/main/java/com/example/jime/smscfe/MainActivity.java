@@ -1,5 +1,6 @@
 package com.example.jime.smscfe;
 
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -23,12 +24,13 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private int VALOR_RETORNO = 1;
     Button buscar,iniciar;
     ListView lista;
-
+    public static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         buscar = (Button)findViewById(R.id.btBuscar);
         iniciar = (Button)findViewById(R.id.btIniciar);
         lista = (ListView)findViewById(R.id.ListaFacturas);
+        activity = this;
 
         buscar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
         intent.setType("text/plain");
         startActivityForResult(Intent.createChooser(intent, "Choose File"), VALOR_RETORNO);
     }
-    public static String leerTxt(String ruta) {
-        String linea;
+    public void leerTxt(String ruta) {
+        ArrayList<datosFactura> datos = new ArrayList<>();
+        String linea = "";
         String lineas[] = new String[10];
         int conta = 0;
         String re = "";
@@ -68,11 +72,20 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader txt = new BufferedReader(new InputStreamReader(new FileInputStream(archivo.getAbsolutePath())));
             while ((linea = txt.readLine()) != null) {
                 System.out.println(linea);
+                String line = linea;
+                String rpu = line.substring(0,line.indexOf("-")).trim();
+                line = linea.substring(line.indexOf("-")+1, line.length());
+                String importe = line.substring(0,line.indexOf("-")).trim();
+                String tel = line.substring(line.indexOf("-")+1, line.length()).trim();
+
+                datosFactura contenido = new datosFactura(rpu,importe,tel,"Pendiente");
+                datos.add(contenido);
             }
+            FacturasAdapter adapter = new FacturasAdapter(this,datos);
+            lista.setAdapter(adapter);
         } catch (Exception e) {
-            System.out.println("ecepcion: " + e.toString());
+            System.out.println("Excepcion: " + e.toString());
         }
-        return re;
     }
 
     public static String getFilePath(Context context, Uri uri) throws URISyntaxException {
