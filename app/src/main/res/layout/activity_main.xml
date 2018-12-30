@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="16sp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:drawableStart="@drawable/archivo"
+        android:text="Buscar archivo"
+        android:textAllCaps="false"
+        android:layout_marginBottom="5sp"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btIniciar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Iniciar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="5sp"
+        android:textSize="18sp" />
+
+    <ListView
+        android:id="@+id/ListaFacturas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
